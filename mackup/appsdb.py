@@ -5,12 +5,7 @@ The Applications Database provides an easy to use interface to load application
 data from the Mackup Database (files).
 """
 import os
-
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
-
+import configparser
 
 from .constants import APPS_DIR
 from .constants import CUSTOM_APPS_DIR

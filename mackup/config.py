@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import configparser
 
 from .constants import (
     CUSTOM_APPS_DIR,
@@ -21,11 +22,6 @@ from .utils import (
     get_google_drive_folder_location,
     get_icloud_folder_location,
 )
-
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
 
 
 class Config(object):
@@ -131,7 +127,8 @@ class Config(object):
         """
         return set(self._apps_to_sync)
 
-    def _setup_parser(self, filename=None):
+    @staticmethod
+    def _setup_parser(filename=None):
         """
         Configure the ConfigParser instance the way we want it.
 
@@ -221,6 +218,10 @@ class Config(object):
                     "The required 'path' can't be found while"
                     " the 'file_system' engine is used."
                 )
+        else:
+            raise ConfigError(
+                "The required 'path' can't be found"
+            )
 
         return str(path)
 

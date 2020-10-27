@@ -7,8 +7,6 @@ import stat
 import subprocess
 import sys
 import sqlite3
-from six.moves import input
-
 from . import constants
 
 
@@ -34,16 +32,12 @@ def confirm(question):
         return True
 
     while True:
-        answer = input(question + " <Yes|No>").lower()
+        answer = input(question + " <Yes|No>:\n").lower()
 
         if answer == "yes" or answer == "y":
-            confirmed = True
-            break
+            return True
         if answer == "no" or answer == "n":
-            confirmed = False
-            break
-
-    return confirmed
+            return False
 
 
 def delete(filepath):

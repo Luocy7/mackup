@@ -30,7 +30,7 @@ class ApplicationProfile(object):
         self.dry_run = dry_run
         self.verbose = verbose
 
-    def getFilepaths(self, filename):
+    def get_file_paths(self, filename):
         """
         Get home and mackup filepaths for given file
 
@@ -64,7 +64,7 @@ class ApplicationProfile(object):
         """
         # For each file used by the application
         for filename in self.files:
-            (home_filepath, mackup_filepath) = self.getFilepaths(filename)
+            (home_filepath, mackup_filepath) = self.get_file_paths(filename)
 
             # If the file exists and is not already a link pointing to Mackup
             if (os.path.isfile(home_filepath) or os.path.isdir(home_filepath)) and not (
@@ -153,7 +153,7 @@ class ApplicationProfile(object):
         """
         # For each file used by the application
         for filename in self.files:
-            (home_filepath, mackup_filepath) = self.getFilepaths(filename)
+            (home_filepath, mackup_filepath) = self.get_file_paths(filename)
 
             # If the file exists and is not already pointing to the mackup file
             # and the folder makes sense on the current platform (Don't sync
@@ -238,7 +238,7 @@ class ApplicationProfile(object):
         """
         # For each file used by the application
         for filename in self.files:
-            (home_filepath, mackup_filepath) = self.getFilepaths(filename)
+            (home_filepath, mackup_filepath) = self.get_file_paths(filename)
 
             # If the mackup file exists
             if os.path.isfile(mackup_filepath) or os.path.isdir(mackup_filepath):

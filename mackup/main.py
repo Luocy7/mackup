@@ -50,12 +50,12 @@ class ColorFormatCodes:
     NORMAL = "\033[0m"
 
 
-def header(str):
-    return ColorFormatCodes.BLUE + str + ColorFormatCodes.NORMAL
+def header(string):
+    return ColorFormatCodes.BLUE + string + ColorFormatCodes.NORMAL
 
 
-def bold(str):
-    return ColorFormatCodes.BOLD + str + ColorFormatCodes.NORMAL
+def bold(string):
+    return ColorFormatCodes.BOLD + string + ColorFormatCodes.NORMAL
 
 
 def main():
@@ -66,9 +66,9 @@ def main():
     mckp = Mackup()
     app_db = ApplicationsDatabase()
 
-    def printAppHeader(app_name):
+    def print_app_header(_app_name):
         if verbose:
-            print(("\n{0} {1} {0}").format(header("---"), bold(app_name)))
+            print("\n{0} {1} {0}".format(header("---"), bold(_app_name)))
 
     # If we want to answer mackup with "yes" for each question
     if args["--force"]:
@@ -89,7 +89,7 @@ def main():
         # Backup each application
         for app_name in sorted(mckp.get_apps_to_backup()):
             app = ApplicationProfile(mckp, app_db.get_files(app_name), dry_run, verbose)
-            printAppHeader(app_name)
+            print_app_header(app_name)
             app.backup()
 
     elif args["restore"]:
@@ -101,7 +101,7 @@ def main():
         mackup_app = ApplicationProfile(
             mckp, app_db.get_files(MACKUP_APP_NAME), dry_run, verbose
         )
-        printAppHeader(MACKUP_APP_NAME)
+        print_app_header(MACKUP_APP_NAME)
         mackup_app.restore()
 
         # Initialize again the apps db, as the Mackup config might have changed
@@ -116,7 +116,7 @@ def main():
 
         for app_name in sorted(app_names):
             app = ApplicationProfile(mckp, app_db.get_files(app_name), dry_run, verbose)
-            printAppHeader(app_name)
+            print_app_header(app_name)
             app.restore()
 
     elif args["uninstall"]:
@@ -142,7 +142,7 @@ def main():
                 app = ApplicationProfile(
                     mckp, app_db.get_files(app_name), dry_run, verbose
                 )
-                printAppHeader(app_name)
+                print_app_header(app_name)
                 app.uninstall()
 
             # Restore the Mackup config before any other config, as we might
